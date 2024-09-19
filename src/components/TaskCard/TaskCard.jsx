@@ -3,7 +3,6 @@ import {
   BodyContainer,
   TaskNameStyle,
   ActionsStyle,
-  PriorityStyle,
   CreatedStyle,
   CompletedStyle,
 } from './TaskCardStyles';
@@ -12,23 +11,26 @@ import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 
 export const TaskCard = () => {
+  let date = '19/09/2024 9:30';
   return (
     <>
       <Background>
         <BodyContainer>
           <TaskNameStyle>
-            <p className="extraStyles">Task Name</p>
+            <>
+              <Chip
+                label="Priority"
+                variant="filled"
+                color="success"
+                size="small"
+                sx={{
+                  marginRight: '5px',
+                }}
+              />
+              <span className="extraStyles">Task Name</span>
+            </>
           </TaskNameStyle>
 
-          <PriorityStyle>
-            <Chip
-              className="extraStyles"
-              label="Priority"
-              variant="filled"
-              color="success"
-              size="small"
-            />
-          </PriorityStyle>
           <ActionsStyle>
             <div className="extraStyles">
               <IconButton color="error" onClick={() => {}}>
@@ -40,10 +42,10 @@ export const TaskCard = () => {
             </div>
           </ActionsStyle>
           <CreatedStyle>
-            <p className="extraStyles">Created Date</p>
+            <p className="extraStyles">{`Creado: ${date}`}</p>
           </CreatedStyle>
           <CompletedStyle>
-            <p className="extraStyles">Completed Date</p>
+            <p className="extraStyles">{`Completado: ${date}`}</p>
           </CompletedStyle>
         </BodyContainer>
       </Background>
