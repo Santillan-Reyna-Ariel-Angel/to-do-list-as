@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import {
   Button,
   FormControl,
@@ -48,6 +48,22 @@ export const TaskRegistration = () => {
   };
 
   console.log('globalTaskList', globalTaskList);
+
+  // Cargar datos en globalTaskList si existen en localStorage (Montaje del componente).
+  useEffect(() => {
+    let data = localStorage.getItem('LocalStorageAllTasks');
+    if (data) {
+      setGlobalTaskList(JSON.parse(data));
+    }
+  }, []);
+
+  // Cargar datos en localStorage cada vez que globalTaskList se actualice.
+  useEffect(() => {
+    localStorage.setItem(
+      'LocalStorageAllTasks',
+      JSON.stringify(globalTaskList)
+    );
+  }, [globalTaskList]);
 
   return (
     <>

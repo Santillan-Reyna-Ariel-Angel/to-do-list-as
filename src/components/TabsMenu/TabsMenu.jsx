@@ -1,6 +1,4 @@
 import { useContext, useState } from 'react';
-import Box from '@mui/material/Box';
-import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
@@ -8,9 +6,11 @@ import { TaskCard } from '../TaskCard/TaskCard';
 import { ContextAllTask } from '../../context/ContextAllTask';
 import {
   Button,
+  Box,
   FormControl,
   FormControlLabel,
   FormLabel,
+  Tab,
   Radio,
   RadioGroup,
 } from '@mui/material';
@@ -49,7 +49,6 @@ export const TabsMenu = () => {
     setGlobalTaskList(pendingTasks); // conservar solo las tareas pendientes
   };
 
-  console.log('filtros', filter);
   return (
     <TabContext value={tab}>
       <Box
