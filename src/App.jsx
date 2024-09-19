@@ -1,7 +1,9 @@
+import { TaskRegistration } from './components/TaskRegistration/TaskRegistration';
+
 function App() {
   return (
     <>
-      <p>Hello AS</p>
+      <TaskRegistration />
     </>
   );
 }
