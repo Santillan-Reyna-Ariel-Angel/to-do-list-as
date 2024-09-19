@@ -6,14 +6,36 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { TaskCard } from '../TaskCard/TaskCard';
 import { ContextAllTask } from '../../context/ContextAllTask';
+import {
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+} from '@mui/material';
 
 export const TabsMenu = () => {
+  const { globalTaskList, setGlobalTaskList } = useContext(ContextAllTask);
   const [tab, setTab] = useState('1');
-  const { globalTaskList } = useContext(ContextAllTask);
+  const [filter, setFilter] = useState('Todos');
+
+  const filterOptions = ['Todos', 'Alta', 'Media', 'Baja'];
 
   const pendingTasks = globalTaskList.filter(
     (task) => task.status === 'pendiente'
   );
+
+  const pendingTasksFiltered = () => {
+    if (filter === 'Todos') {
+      return pendingTasks;
+    } else {
+      let newPendingTasks = pendingTasks.filter(
+        (task) => task.priority === filter
+      );
+      return newPendingTasks;
+    }
+  };
 
   const completedTasks = globalTaskList.filter(
     (task) => task.status !== 'pendiente'
@@ -23,6 +45,11 @@ export const TabsMenu = () => {
     setTab(newValue);
   };
 
+  const deleteCompletedAllTasks = () => {
+    setGlobalTaskList(pendingTasks); // conservar solo las tareas pendientes
+  };
+
+  console.log('filtros', filter);
   return (
     <TabContext value={tab}>
       <Box
@@ -34,15 +61,89 @@ export const TabsMenu = () => {
         }}
       >
         <TabList onChange={handleChangeTab} aria-label="Menu de tareas">
-          <Tab label={`pendientes (${pendingTasks?.length})`} value="1" />
-          <Tab label={`completados (${completedTasks?.length})`} value="2" />
+          <Tab
+            label={`pendientes (${pendingTasks?.length})`}
+            value="1"
+            sx={{ fontWeight: 'bold', color: '#051e34' }}
+          />
+          <Tab
+            label={`completados (${completedTasks?.length})`}
+            value="2"
+            sx={{
+              fontWeight: 'bold',
+              color: '#051e34',
+            }}
+          />
         </TabList>
       </Box>
       <TabPanel value="1" sx={{ padding: '10px' }}>
-        <TaskCard tasks={pendingTasks} />
+        <Box
+          sx={{
+            display: 'grid',
+            marginTop: '10px',
+            width: '500',
+            justifyContent: 'center',
+          }}
+        >
+          {pendingTasks.length > 0 && (
+            <>
+              <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label">
+                  Filtrar por prioridad:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  name="filterTasksOptions"
+                  value={filter}
+                  onChange={(event) => {
+                    setFilter(event.target.value);
+                  }}
+                >
+                  {filterOptions.map((option) => (
+                    <FormControlLabel
+                      key={option}
+                      value={option}
+                      control={<Radio size="small" />}
+                      label={option}
+                    />
+                  ))}
+                </RadioGroup>
+              </FormControl>
+
+              <TaskCard
+                tasks={
+                  filter?.status === 'todos'
+                    ? pendingTasks
+                    : pendingTasksFiltered()
+                }
+              />
+            </>
+          )}
+        </Box>
       </TabPanel>
       <TabPanel value="2" sx={{ padding: '10px' }}>
-        <TaskCard tasks={completedTasks} />
+        <Box
+          sx={{
+            display: 'grid',
+            marginTop: '10px',
+            width: '500',
+            justifyContent: 'center',
+          }}
+        >
+          {completedTasks?.length > 0 && (
+            <>
+              <Button
+                variant="contained"
+                color="error"
+                onClick={() => deleteCompletedAllTasks()}
+              >
+                Eliminar todos
+              </Button>
+
+              <TaskCard tasks={completedTasks} />
+            </>
+          )}
+        </Box>
       </TabPanel>
     </TabContext>
   );
