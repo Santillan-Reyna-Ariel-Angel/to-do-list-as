@@ -1,9 +1,4 @@
 import { useContext, useState } from 'react';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import { TaskCard } from '../TaskCard/TaskCard';
-import { ContextAllTask } from '../../context/ContextAllTask';
 import {
   Button,
   Box,
@@ -14,6 +9,9 @@ import {
   Radio,
   RadioGroup,
 } from '@mui/material';
+import { TabContext, TabList, TabPanel } from '@mui/lab/';
+import { ContextAllTask } from '../../context/ContextAllTask';
+import { TaskCard } from '../TaskCard/TaskCard';
 
 export const TabsMenu = () => {
   const { globalTaskList, setGlobalTaskList } = useContext(ContextAllTask);

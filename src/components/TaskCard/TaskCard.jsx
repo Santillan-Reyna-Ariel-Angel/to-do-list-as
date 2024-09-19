@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import {
   Background,
@@ -11,13 +12,12 @@ import { Chip, IconButton } from '@mui/material';
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import { ContextAllTask } from '../../context/ContextAllTask';
-import { useContext } from 'react';
 import { getCurrentDateFormatted } from '../../utils/globalFunctions';
 
 export const TaskCard = ({ tasks = [] }) => {
   const { globalTaskList, setGlobalTaskList } = useContext(ContextAllTask);
 
-  const handleTaskState = (taskItem) => {
+  const handleTaskStatus = (taskItem) => {
     let newGlobalTaskList = globalTaskList.map((task) => {
       if (task.id === taskItem.id) {
         return {
@@ -78,7 +78,7 @@ export const TaskCard = ({ tasks = [] }) => {
                 {task?.status === 'pendiente' && (
                   <IconButton
                     color="success"
-                    onClick={() => handleTaskState(task)}
+                    onClick={() => handleTaskStatus(task)}
                   >
                     <CheckRoundedIcon />
                   </IconButton>

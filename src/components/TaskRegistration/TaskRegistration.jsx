@@ -7,7 +7,6 @@ import {
   Select,
   TextField,
 } from '@mui/material';
-import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import {
   Background,
   BodyContainer,
@@ -15,7 +14,7 @@ import {
   TaskStyle,
   BtnStyle,
 } from './TaskRegistrationStyles';
-
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import { ContextAllTask } from '../../context/ContextAllTask';
 import { TabsMenu } from '../TabsMenu/TabsMenu';
 import { v4 as uuidv4 } from 'uuid';
@@ -28,7 +27,7 @@ export const TaskRegistration = () => {
 
   let taskDataDefault = {
     id: null,
-    priority: '',
+    priority: 'Baja',
     name: '',
     status: 'pendiente',
     creationDate: null,
@@ -47,8 +46,6 @@ export const TaskRegistration = () => {
     setTask(taskDataDefault);
   };
 
-  console.log('globalTaskList', globalTaskList);
-
   // Cargar datos en globalTaskList si existen en localStorage (Montaje del componente).
   useEffect(() => {
     let data = localStorage.getItem('LocalStorageAllTasks');
@@ -64,6 +61,8 @@ export const TaskRegistration = () => {
       JSON.stringify(globalTaskList)
     );
   }, [globalTaskList]);
+
+  console.log('globalTaskList', globalTaskList);
 
   return (
     <>
@@ -92,6 +91,7 @@ export const TaskRegistration = () => {
               </Select>
             </FormControl>
           </PriorityStyle>
+
           <TaskStyle>
             <TextField
               className="extraStyles"
@@ -114,6 +114,7 @@ export const TaskRegistration = () => {
               variant="contained"
               color="success"
               endIcon={<AddCircleRoundedIcon />}
+              disabled={task?.name.trim() === ''}
               onClick={() => AddTask()}
             >
               Agregar
