@@ -10,7 +10,7 @@ export const Background = styled.div`
 export const BodyContainer = styled.div`
   display: grid;
   background-color: #fff;
-  grid-template-columns: 150px 230px auto;
+  grid-template-columns: 150px 250px auto;
   grid-template-rows: auto;
   grid-row-gap: 15px;
   grid-column-gap: 10px;
@@ -20,13 +20,6 @@ export const BodyContainer = styled.div`
   backdrop-filter: blur(18px);
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
   grid-template-areas: 'PriorityStyle TaskStyle BtnStyle';
-
-  /* @media screen and (max-width: 768px) {
-    grid-template-columns: 120px 160px auto;
-    grid-row-gap: 10px;
-    grid-column-gap: 5px;
-    padding: 15px 15px 10px 15px;
-  } */
 `;
 
 export const PriorityStyle = styled.div`

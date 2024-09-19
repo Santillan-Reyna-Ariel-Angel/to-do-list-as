@@ -3,14 +3,14 @@ import styled from 'styled-components';
 export const Background = styled.div`
   display: grid;
   justify-content: center;
-  margin-top: 3%;
+  margin-top: 15px;
   width: 100%;
 `;
 
 export const BodyContainer = styled.div`
   display: grid;
   background-color: #fff;
-  grid-template-columns: 250px auto;
+  grid-template-columns: 280px auto;
   grid-template-rows: auto;
   grid-row-gap: 2px;
   grid-column-gap: 0px;
@@ -20,13 +20,6 @@ export const BodyContainer = styled.div`
   backdrop-filter: blur(18px);
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
   grid-template-areas: 'TaskNameStyle  ActionsStyle' 'CreatedStyle  ActionsStyle' 'CompletedStyle  ActionsStyle';
-
-  /* @media screen and (max-width: 768px) {
-    grid-template-columns: 120px auto;
-    grid-row-gap: 10px;
-    grid-column-gap: 5px;
-    padding: 15px 15px 10px 15px;
-  } */
 `;
 
 export const TaskNameStyle = styled.div`

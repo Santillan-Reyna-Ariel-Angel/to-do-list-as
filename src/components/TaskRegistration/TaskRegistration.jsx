@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import {
   Button,
   FormControl,
@@ -16,25 +16,38 @@ import {
   BtnStyle,
 } from './TaskRegistrationStyles';
 
-import { TaskCard } from './../TaskCard/TaskCard';
+import { ContextAllTask } from '../../context/ContextAllTask';
+import { TabsMenu } from '../TabsMenu/TabsMenu';
+import { v4 as uuidv4 } from 'uuid';
+import { getCurrentDateFormatted } from '../../utils/globalFunctions';
 
 export const TaskRegistration = () => {
+  const { globalTaskList, setGlobalTaskList } = useContext(ContextAllTask);
+
   const PRIORITY_LIST = ['Alta', 'Media', 'Baja'];
 
   let taskDataDefault = {
+    id: null,
     priority: '',
     name: '',
+    status: 'pendiente',
+    creationDate: null,
+    completionDate: null,
   };
 
   const [task, setTask] = useState(taskDataDefault);
-  const [taskList, setTaskList] = useState([]);
 
   const AddTask = () => {
-    setTaskList([...taskList, task]);
+    let newTask = {
+      ...task,
+      id: uuidv4(),
+      creationDate: getCurrentDateFormatted(),
+    };
+    setGlobalTaskList([...globalTaskList, newTask]);
     setTask(taskDataDefault);
   };
 
-  console.log('taskList', taskList);
+  console.log('globalTaskList', globalTaskList);
 
   return (
     <>
@@ -45,7 +58,7 @@ export const TaskRegistration = () => {
               <InputLabel>Prioridad</InputLabel>
               <Select
                 label="Prioridad"
-                value={task.priority}
+                value={task?.priority}
                 name="priority"
                 onChange={(event) =>
                   setTask({
@@ -69,7 +82,7 @@ export const TaskRegistration = () => {
               name="name"
               label={'Tarea'}
               variant="outlined"
-              value={task.name}
+              value={task?.name}
               onChange={(event) =>
                 setTask({
                   ...task,
@@ -93,7 +106,7 @@ export const TaskRegistration = () => {
         </BodyContainer>
       </Background>
 
-      <TaskCard />
+      <TabsMenu />
     </>
   );
 };
