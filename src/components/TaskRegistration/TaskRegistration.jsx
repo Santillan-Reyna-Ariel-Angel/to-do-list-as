@@ -12,9 +12,11 @@ import {
   Background,
   BodyContainer,
   PriorityStyle,
-  TitleStyle,
+  TaskStyle,
   BtnStyle,
 } from './TaskRegistrationStyles';
+
+import { TaskCard } from './../TaskCard/TaskCard';
 
 export const TaskRegistration = () => {
   const PRIORITY_LIST = ['Alta', 'Media', 'Baja'];
@@ -39,7 +41,7 @@ export const TaskRegistration = () => {
       <Background>
         <BodyContainer>
           <PriorityStyle>
-            <FormControl className="input">
+            <FormControl className="extraStyles">
               <InputLabel>Prioridad</InputLabel>
               <Select
                 label="Prioridad"
@@ -61,9 +63,9 @@ export const TaskRegistration = () => {
               </Select>
             </FormControl>
           </PriorityStyle>
-          <TitleStyle>
+          <TaskStyle>
             <TextField
-              className="input"
+              className="extraStyles"
               name="name"
               label={'Tarea'}
               variant="outlined"
@@ -76,9 +78,10 @@ export const TaskRegistration = () => {
               }
               size={'medium'}
             />
-          </TitleStyle>
+          </TaskStyle>
           <BtnStyle>
             <Button
+              className="extraStyles"
               variant="contained"
               color="success"
               endIcon={<AddCircleRoundedIcon />}
@@ -89,6 +92,8 @@ export const TaskRegistration = () => {
           </BtnStyle>
         </BodyContainer>
       </Background>
+
+      <TaskCard />
     </>
   );
 };

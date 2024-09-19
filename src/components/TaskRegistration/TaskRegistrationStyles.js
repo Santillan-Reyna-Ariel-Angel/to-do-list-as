@@ -10,35 +10,35 @@ export const Background = styled.div`
 export const BodyContainer = styled.div`
   display: grid;
   background-color: #fff;
-  grid-template-columns: 150px 230px auto; //170px 170px;
+  grid-template-columns: 150px 230px auto;
   grid-template-rows: auto;
   grid-row-gap: 15px;
   grid-column-gap: 10px;
   padding: 15px 20px;
   border: 4px solid #051e34;
-  border-radius: 10px 10px 10px 10px; //en vista: 0px 0px 10px 10px; en <DialogEmpty/> : 0px 0px 0px 0px;
+  border-radius: 10px 10px 10px 10px;
   backdrop-filter: blur(18px);
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
-  grid-template-areas: 'PriorityStyle TitleStyle BtnStyle';
+  grid-template-areas: 'PriorityStyle TaskStyle BtnStyle';
 
-  @media screen and (max-width: 768px) {
+  /* @media screen and (max-width: 768px) {
     grid-template-columns: 120px 160px auto;
     grid-row-gap: 10px;
     grid-column-gap: 5px;
     padding: 15px 15px 10px 15px;
-  }
+  } */
 `;
 
 export const PriorityStyle = styled.div`
   grid-area: PriorityStyle;
-  .input {
+  .extraStyles {
     width: 100%;
   }
 `;
 
-export const TitleStyle = styled.div`
-  grid-area: TitleStyle;
-  .input {
+export const TaskStyle = styled.div`
+  grid-area: TaskStyle;
+  .extraStyles {
     width: 100%;
   }
 `;
@@ -46,7 +46,7 @@ export const TitleStyle = styled.div`
 export const BtnStyle = styled.div`
   grid-area: BtnStyle;
   align-self: center;
-  .input {
+  .extraStyles {
     width: 100%;
   }
 `;
